@@ -6,7 +6,7 @@ files:
 - name: main.py
   visible: true
   placeholders:
-  - offset: 144
+  - offset: 403
     length: 40
     placeholder_text: '#  TODO инициализировать объект "Стакан"'
     initial_state:
@@ -27,7 +27,7 @@ files:
               if occupied_volume < 0:
                   raise ValueError
               self.occupied_volume = occupied_volume  # объем жидкости в стакане
-  - offset: 218
+  - offset: 564
     length: 51
     placeholder_text: '...  # TODO инициализировать два объекта типа Glass'
     initial_state:
@@ -39,7 +39,7 @@ files:
     encrypted_possible_answer: |-
       glass1 = Glass(200, 100)  # экземпляр класса
           glass2 = Glass(500, 50)  # экземпляр класса
-  - offset: 275
+  - offset: 651
     length: 57
     placeholder_text: '# TODO попробовать инициализировать не корректные объекты'
     initial_state:

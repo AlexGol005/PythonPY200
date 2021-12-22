@@ -10,6 +10,7 @@ class Glass:
         return f"Glass({self.capacity_volume}, {self.occupied_volume})"
 
     def __str__(self) -> str:
+        return f"Стакан объёмом {self.capacity_volume} , объем жидкости в стакане {self.occupied_volume}"
         ...  # TODO метод должен возвращать строку, которая содержит человеко-читаемую информацию
 
 
