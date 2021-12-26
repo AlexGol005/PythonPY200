@@ -6,8 +6,8 @@ files:
 - name: main.py
   visible: true
   placeholders:
-  - offset: 403
-    length: 40
+  - offset: 144
+    length: 416
     placeholder_text: '#  TODO инициализировать объект "Стакан"'
     initial_state:
       length: 40
@@ -27,7 +27,7 @@ files:
               if occupied_volume < 0:
                   raise ValueError
               self.occupied_volume = occupied_volume  # объем жидкости в стакане
-  - offset: 564
+  - offset: 594
     length: 51
     placeholder_text: '...  # TODO инициализировать два объекта типа Glass'
     initial_state:

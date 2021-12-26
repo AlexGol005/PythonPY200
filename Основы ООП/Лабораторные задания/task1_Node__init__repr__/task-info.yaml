@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 371
-    length: 110
+    length: 68
     placeholder_text: |-
       # TODO  инициализировать атрибуты экземпляра класса Node
               ...
@@ -12,12 +12,12 @@ files:
       length: 68
       offset: 371
     initialized_from_dependency: false
-    selected: true
-    status: Solved
+    selected: false
+    status: Unchecked
     encrypted_possible_answer: |-
       self.value = value
               self.next = next_
-  - offset: 487
+  - offset: 445
     length: 60
     placeholder_text: '# TODO реализовать метод __repr__ для отображения экземпляра'
     initial_state:
@@ -25,40 +25,40 @@ files:
       offset: 445
     initialized_from_dependency: false
     selected: false
-    status: Solved
+    status: Unchecked
     encrypted_possible_answer: |-
       def __repr__(self) -> str:
               return f"Node({self.value}, {self.next})"
-  - offset: 675
-    length: 44
+  - offset: 552
+    length: 40
     placeholder_text: '...  # TODO инициализировать первый узел'
     initial_state:
       length: 40
       offset: 552
     initialized_from_dependency: false
-    selected: true
-    status: Solved
+    selected: false
+    status: Unchecked
     encrypted_possible_answer: Node(1)
-  - offset: 739
-    length: 44
+  - offset: 612
+    length: 40
     placeholder_text: '...  # TODO инициализировать второй узел'
     initial_state:
       length: 40
       offset: 612
     initialized_from_dependency: false
-    selected: true
-    status: Solved
+    selected: false
+    status: Unchecked
     encrypted_possible_answer: Node(2)
-  - offset: 805
-    length: 89
+  - offset: 675
+    length: 78
     placeholder_text: '...  # TODO через атрибут экземпляра устанавливаем первому
       узлу следующий узел'
     initial_state:
       length: 78
       offset: 675
     initialized_from_dependency: false
-    selected: true
-    status: Solved
+    selected: false
+    status: Unchecked
     encrypted_possible_answer: second_node
   text: |
     from typing import Any, Optional
@@ -97,8 +97,5 @@ files:
     Node(1, Node(2, None))
     Node(2, None)
   learner_created: false
-status: Solved
-feedback:
-  message: Congratulations!
-  time: Wed, 22 Dec 2021 16:52:35 UTC
+status: Unchecked
 record: -1
