@@ -6,7 +6,7 @@ from node import Node
 class LinkedList:
     def __init__(self, data: Iterable = None):
         """Конструктор связного списка"""
-        # TODO атрибут, хранящий длину последовательности
+        self.len = 0 # TODO атрибут, хранящий длину последовательности
         self.head: Optional[Node] = None
 
         self.list_nodes = []
@@ -17,7 +17,7 @@ class LinkedList:
         """ Метод, который создает вспомогательный список и связывает в нём узлы. """
         self.list_nodes = [Node(value) for value in data]
         self.head = self.list_nodes[0]
-        # TODO устанавливаем длину последовательности
+        self.len = len(self.list_nodes)# TODO устанавливаем длину последовательности
 
         for i in range(len(self.list_nodes) - 1):
             current_node = self.list_nodes[i]
@@ -42,7 +42,8 @@ class LinkedList:
 
         if not isinstance(index, int):
             raise TypeError()
-
+        if not 0 <= index < self.len:
+            raise IndexError
         # TODO проверка корректности границ индекса
 
         current_node = self.head
@@ -62,5 +63,7 @@ if __name__ == '__main__':
     list_ = [1, 2, 3]
     linked_list = LinkedList(list_)
     print(linked_list)
+    for node_value in linked_list:
+        print(node_value)
 
     # TODO с помощью цикла for распечатать в столбик все значения связного списка
