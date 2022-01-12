@@ -3,20 +3,20 @@ files:
 - name: main.py
   visible: true
   placeholders:
-  - offset: 246
-    length: 43
+  - offset: 341
+    length: 40
     placeholder_text: '...  # TODO инициализировать связный список'
     initial_state:
       length: 43
       offset: 246
     initialized_from_dependency: false
     selected: true
-    status: Unchecked
+    status: Solved
     encrypted_possible_answer: |-
       if data is not None:
                   for value in data:
                       self.append(value)
-  - offset: 1482
+  - offset: 1867
     length: 72
     placeholder_text: '...  # TODO реализовать алгоритм добавления узла в конец последовательности'
     initial_state:
@@ -24,7 +24,7 @@ files:
       offset: 1481
     initialized_from_dependency: false
     selected: true
-    status: Unchecked
+    status: Solved
     encrypted_possible_answer: |-
       append_node = Node(value)
 
@@ -144,5 +144,8 @@ files:
             self.is_valid(next_)
             self.next = next_
   learner_created: false
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 05 Jan 2022 10:57:55 UTC
 record: -1

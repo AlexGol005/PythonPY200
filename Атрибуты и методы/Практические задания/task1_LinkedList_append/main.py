@@ -8,8 +8,11 @@ class LinkedList:
         """Конструктор связного списка"""
         self.len = 0
         self.head: Optional[Node] = None
+        if data is not None:
+            for value in data:
+                self.append(value)
 
-        ...  # TODO инициализировать связный список
+          # TODO инициализировать связный список
 
     def step_by_step_on_nodes(self, index: int) -> Node:
         """ Функция выполняет перемещение по узлам до указанного индекса. И возвращает узел. """
@@ -49,7 +52,17 @@ class LinkedList:
 
     def append(self, value: Any):
         """ Добавление элемента в конец связного списка. """
+        append_node = Node(value)
 
+        if self.head is None:
+            self.head = append_node
+        else:
+            last_index = self.len - 1
+            last_node = self.step_by_step_on_nodes(last_index)
+
+            self.linked_nodes(last_node, append_node)
+
+        self.len += 1
           # TODO реализовать алгоритм добавления узла в конец последовательности
 
 

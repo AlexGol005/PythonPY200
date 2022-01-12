@@ -28,5 +28,8 @@ files:
   text: |
     Glass(200, 100)
   learner_created: false
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Tue, 04 Jan 2022 15:34:46 UTC
 record: -1

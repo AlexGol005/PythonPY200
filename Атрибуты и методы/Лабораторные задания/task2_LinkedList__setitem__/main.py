@@ -61,6 +61,9 @@ class LinkedList:
         return node.value
 
     def __setitem__(self, key, value):
+        node = self.step_by_step_on_nodes(key)
+        node.value = value
+        return node.value
 
 
     # TODO реализовать магический метод __setitem__
@@ -81,5 +84,6 @@ if __name__ == '__main__':
     print(linked_list)
 
     print(linked_list[1])
+    linked_list.__setitem__(1, 100)
     # TODO установить элементу с индексом 1 значение 100
     print(linked_list[1])

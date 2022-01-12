@@ -34,7 +34,7 @@ files:
       length: 64
       offset: 602
     initialized_from_dependency: false
-    selected: false
+    selected: true
     status: Solved
     encrypted_possible_answer: |-
       if not isinstance(node, (type(None), Node)):
@@ -48,7 +48,7 @@ files:
       length: 98
       offset: 740
     initialized_from_dependency: false
-    selected: false
+    selected: true
     status: Solved
     encrypted_possible_answer: |-
       self.is_valid(next_)

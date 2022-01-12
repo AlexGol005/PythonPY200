@@ -54,8 +54,9 @@ class LinkedList:
 
 
 if __name__ == "__main__":
-    list_ = [1, 2, 3]
+    list_ = [1, 2, 3, 4, 5, 6]
     linked_list = LinkedList(list_)
     print(linked_list)
 
-    print(linked_list[1])
+    print(linked_list.step_by_step_on_nodes(4))
+
