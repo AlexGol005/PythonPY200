@@ -60,11 +60,29 @@ class LinkedList:
     def __len__(self):
         return self.len
 
-    def __index__(self, value: Any) -> int:
-        """Метод возвращает индекс узла по указанному значению узла"""
-        return index
+    def index(self, value: Any) -> int:
+        """Метод возвращает индекс узла по указанному значению"""
+        # i = 0
+        # while i < self.len:
+        #
+        #     a = self.step_by_step_on_nodes(i)
+        #     if a == Node(value):
+        #         print(a)
+        #         break
+        #     else:
+        #         i += 1
+        #         print(a)
+        # return i
+
+        for i in range(self.len):
+            node = self.step_by_step_on_nodes(i)
+            if node.value == value:
+                break
+        return i
+
 
 
 if __name__ == "__main__":
-    list_ = [1, 2, 3]
+    list_ = [21, 5, 7, 25, 89]
     linked_list = LinkedList(list_)
+    print(linked_list.index(5))
