@@ -14,7 +14,7 @@ class LinkedList:
             self.init_linked_list(data)
 
     def init_linked_list(self, data: Iterable):
-        """ Метод, который создает вспомогательный список и связывает в нём узлы. """
+        """ Метод, который создает вспомогательный список и связывает в нём узлы."""
         self.list_nodes = [Node(value) for value in data]
         self.head = self.list_nodes[0]
         self.len = len(self.list_nodes)
@@ -73,6 +73,42 @@ class LinkedList:
             raise ValueError
         return i
 
+    def count(self, sub: Any) -> int:
+        """Метод возвращает количество вхождений указанного значения в список"""
+        i = 0
+        sum = 0
+        while i < self.len:
+            node = self.step_by_step_on_nodes(i)
+            if node.value == sub:
+                i += 1
+                sum += 1
+            else:
+                i += 1
+        return sum
+
+    def append(self, value: Any) -> None:
+        """ Добавление элемента в конец связного списка. """
+        append_node = Node(value)
+
+        if self.head is None:
+            self.head = append_node
+        else:
+            last_index = self.len - 1
+            last_node = self.step_by_step_on_nodes(last_index)
+
+            self.linked_nodes(last_node, append_node)
+
+        self.len += 1
+
+    def extend(self, value: list) -> None:
+        """ Добавление всех элементов списка в конец связного списка. """
+        for i in range(len(value)):
+            self.append(value[i])
+
+
+
 if __name__ == "__main__":
-    # Write your solution here
-    pass
+    list_ = [21, 5, 7, 0, 5, 7, 8, 7, 9, 7, 0, 5]
+    linked_list = LinkedList(list_)
+    linked_list.extend((1, 2))
+    print(linked_list)

@@ -76,20 +76,19 @@ class LinkedList:
     def count(self, sub: Any) -> int:
         """Метод возвращает количество вхождений указанного значения в список"""
         i = 0
-        j = 0
         sum = 0
         while i < self.len:
             node = self.step_by_step_on_nodes(i)
-            if node.value == sub[j]:
-                    j += 1
-                    i += 1
+            if node.value == sub:
+                i += 1
+                sum += 1
             else:
-                j = 0
                 i += 1
         return sum
 
 
 
 if __name__ == "__main__":
-    # Write your solution here
-    pass
+    list_ = [21, 5, 7, 0, 5, 7, 8, 7, 9, 7, 0, 5]
+    linked_list = LinkedList(list_)
+    print(linked_list.count(7))
