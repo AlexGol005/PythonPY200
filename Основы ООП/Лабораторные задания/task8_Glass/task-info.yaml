@@ -3,8 +3,8 @@ files:
 - name: task.py
   visible: true
   placeholders:
-  - offset: 0
-    length: 47
+  - offset: 1737
+    length: 48
     placeholder_text: '# TODO Добавить методы add_water и remove_water'
     dependency:
       section: Основы ООП
@@ -14,10 +14,10 @@ files:
       placeholder: 1
       is_visible: true
     initial_state:
-      length: 47
-      offset: 0
+      length: 48
+      offset: 1737
     initialized_from_dependency: false
-    selected: false
+    selected: true
     status: Solved
     encrypted_possible_answer: |
       # TODO

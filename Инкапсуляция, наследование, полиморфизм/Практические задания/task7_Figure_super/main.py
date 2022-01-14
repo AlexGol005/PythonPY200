@@ -8,10 +8,10 @@ class Figure:
 
 class Rectangle(Figure):
     def __init__(self, a, b, name=None):
+        super().__init__(name=name)
         # TODO вызвать конструктор базового класса
         self.a = a
         self.b = b
-
 
 if __name__ == "__main__":
     rect = Rectangle(5, 10, 'rect_fig')

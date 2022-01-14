@@ -8,6 +8,8 @@ class Glass:
             raise TypeError('ojoj')
         self.material = material
 
+class Glass:
+    def __init__(self):
 
 if __name__ == "__main__":
 

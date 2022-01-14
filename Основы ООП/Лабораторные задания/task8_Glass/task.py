@@ -23,14 +23,14 @@ class Glass:
             raise ValueError
         self.occupied_volume = occupied_volume  # объем стакана
 
-    def add_water(self, volume: Union[int, float]) -> Union[int, float]:
+    def add_water(self, volume: Union[int, float]) -> None:
         if not isinstance(volume, (int, float)):
             raise TypeError
         if volume + self.occupied_volume > self.capacity_volume:
             raise ValueError('многовато наливаем')
         return self.occupied_volume + volume
 
-    def remove_water(self, volume: Union[int, float]) -> Union[int, float]:
+    def remove_water(self, volume: Union[int, float]) -> None:
         if not isinstance(volume, (int, float)):
             raise TypeError
         if self.occupied_volume - volume < 0:
