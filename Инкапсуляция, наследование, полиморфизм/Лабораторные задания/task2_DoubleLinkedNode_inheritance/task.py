@@ -35,17 +35,19 @@ class Node:
 
 # TODO реализовать класс DoubleLinkedNode
 class DoubleLinkedNode(Node):
-    def __init__(self, value, next_, prev):
+    def __init__(self, value, next_=None, prev=None):
         super().__init__(value, next_)
         self.prev = prev
 
     def __repr__(self) -> str:
-        next_ = str(None) if self.next is None \
-            else f"{self.__class__.__name__}({self.next.value}, None, None)"
-        return f"{self.__class__.__name__}(value, next_, prev)  ({self.value}, {None})" if self.next is None else f"Node({self.value}, Node({self.next}))"
+        name = self.__class__.__name__
+        return f"{name}({self.value}, {None}, {None}))" if self.next is None and self.prev is None else\
+               f"{name}({self.value}, {name}({self.next}), {None})" if self.prev is None else\
+               f"{name}({self.value}, {None}, {name}({self.prev}))" if self.next is None else\
+               f"{name}({self.value}, {name}({self.next}),{name}({self.prev}))"
 
     def is_valid(self, dnode: Any) -> None:
-        if not isinstance(dnode, (type(DoubleLinkedNode), DoubleLinkedNode)):
+        if not isinstance(dnode, (type(None), DoubleLinkedNode)):
             raise TypeError
 
     @property
@@ -56,3 +58,8 @@ class DoubleLinkedNode(Node):
     def prev(self, prev: Optional["DoubleLinkedNode"]):
         self.is_valid(prev)
         self._prev = prev
+
+dl1 = DoubleLinkedNode(1, DoubleLinkedNode(2))
+print(repr(dl1))
+print(dl1.prev)
+# DoubleLinkedNode(1, DoubleLinkedNode(2), DoubleLinkedNode(3)))
