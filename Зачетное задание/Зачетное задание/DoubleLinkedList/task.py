@@ -1,4 +1,5 @@
-from typing import Iterable, Optional, Any
+from abc import abstractmethod
+from typing import Iterable, Optional, Any, _T, overload
 
 from collections.abc import MutableSequence
 
@@ -14,6 +15,32 @@ class LinkedList(MutableSequence):
         self.list_nodes = None
         if data is not None:
             self.init_linked_list(data)
+
+    def _step_by_step_on_nodes(self, index: int) -> Node:
+        """ Функция выполняет перемещение по узлам до указанного индекса. И возвращает узел. """
+        if not isinstance(index, int):
+            raise TypeError()
+        if not 0 <= index < self.len:  # для for
+            raise IndexError()
+        current_node = self.head
+        for _ in range(index):
+            current_node = current_node.next
+        return current_node
+
+    def __getitem__(self, index: int) -> Any:
+        """ Метод возвращает значение узла по указанному индексу. """
+        node = self._step_by_step_on_nodes(index)
+        return node.value
+
+    def __setitem__(self, index: int, value: Any) -> Any:
+        node = self._step_by_step_on_nodes(index)
+        node.value = value
+        return node.value
+
+
+
+
+
 
     def init_linked_list(self, data: Iterable):
         """ Метод, который создает вспомогательный список и связывает в нём узлы."""
@@ -36,25 +63,9 @@ class LinkedList(MutableSequence):
         """
         left_node.set_next(right_node)
 
-    def step_by_step_on_nodes(self, index: int) -> Node:
-        """ Функция выполняет перемещение по узлам до указанного индекса. И возвращает узел. """
 
-        if not isinstance(index, int):
-            raise TypeError()
 
-        if not 0 <= index < self.len:  # для for
-            raise IndexError()
 
-        current_node = self.head
-        for _ in range(index):
-            current_node = current_node.next
-
-        return current_node
-
-    def __getitem__(self, index: int) -> Any:
-        """ Метод возвращает значение узла по указанному индексу. """
-        node = self.step_by_step_on_nodes(index)
-        return node.value
 
     def __str__(self) -> str:
         return f"{[node for node in self]}"
@@ -137,6 +148,21 @@ class LinkedList(MutableSequence):
         a = node.value
         self.__delitem__(index)
         return a
+
+    # auto
+    def insert(self, index: int, value: _T) -> None:
+        pass
+
+    @overload
+    @abstractmethod
+    def __setitem__(self, i: int, o: _T) -> None: ...
+
+    @overload
+    @abstractmethod
+    def __setitem__(self, s: slice, o: Iterable[_T]) -> None: ...
+
+    def __setitem__(self, i: int, o: _T) -> None:
+        pass
 
 
 class DoubleLinkedList(LinkedList):

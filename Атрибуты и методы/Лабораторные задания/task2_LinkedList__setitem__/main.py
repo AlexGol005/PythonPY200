@@ -87,3 +87,4 @@ if __name__ == '__main__':
     linked_list.__setitem__(1, 100)
     # TODO установить элементу с индексом 1 значение 100
     print(linked_list[1])
+    print(linked_list)

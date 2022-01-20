@@ -69,8 +69,16 @@ class LinkedList:
     def __str__(self) -> str:
         return f"{self.to_list()}"
 
+    def extend(self, value: list) -> None:
+        """ Добавление всех элементов списка в конец связного списка. """
+        for i in range(len(value)):
+            self.append(value[i])
+
     def __add__(self, other: "LinkedList") -> "LinkedList":
-        ...  # TODO реализовать конкатенацию последовательностей
+
+        self.extend(LinkedList(other).to_list())
+        return self
+         # TODO реализовать конкатенацию последовательностей
 
 
 if __name__ == "__main__":

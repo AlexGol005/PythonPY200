@@ -23,7 +23,7 @@ class Date:
         self.year = year
 
     def __repr__(self) -> str:
-        return f"{str(self.day).rjust(2, '0')}/{str(self.month).rjust(2, '0')}/{self.year}"
+        return f"Date({str(self.day)}, {str(self.month)}, {self.year})"
 
 
     def __str__(self) -> str:

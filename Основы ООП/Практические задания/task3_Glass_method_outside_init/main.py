@@ -32,8 +32,8 @@ class Glass:
 
 if __name__ == "__main__":
     glass1 = Glass(200, 100)
-    print( glass1.capacity_volume,
-    glass1.occupied_volume)
+    print(glass1.capacity_volume)
+    print(glass1.occupied_volume)
 
 
 
