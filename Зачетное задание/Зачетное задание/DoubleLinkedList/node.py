@@ -11,7 +11,9 @@ class Node:
         :param next_: следующий узел, если он есть
         """
         self.value = value
-        self.next = next_  # вызовется setter
+        # self._next = next_  # вызовется setter
+        self.next = None
+        self.set_next(next_)
 
     def __repr__(self) -> str:
         return f"Node({self.value}, {None})" if self.next is None else f"Node({self.value}, Node({self.next}))"
@@ -23,27 +25,30 @@ class Node:
         if not isinstance(node, (type(None), Node)):
             raise TypeError
 
-    @property
-    def next(self):
-        return self._next
+    # @property
+    # def next(self):
+    #     return self._next
+    #
+    # @next.setter
+    # def next(self, next_: Optional["Node"]):
+    #     self.is_valid(next_)
+    #     self._next = next_
 
-    @next.setter
-    def next(self, next_: Optional["Node"]):
+    def set_next(self, next_: Optional["Node"] = None) -> None:
         self.is_valid(next_)
-        self._next = next_
-
+        self.next = next_
 
 class DoubleLinkedNode(Node):
     def __init__(self, value, next_=None, prev=None):
         super().__init__(value, next_)
-        self.prev = prev
+        self._prev = prev
 
     def __repr__(self) -> str:
         name = self.__class__.__name__
-        return f"{name}({self.value}, {None}, {None}))" if self.next is None and self.prev is None else\
-               f"{name}({self.value}, {name}({self.next}), {None})" if self.prev is None else\
-               f"{name}({self.value}, {None}, {name}({self.prev}))" if self.next is None else\
-               f"{name}({self.value}, {name}({self.next}),{name}({self.prev}))"
+        return f"{name}({self.value}, {None}, {None}))" if self._next is None and self._prev is None else\
+               f"{name}({self.value}, {name}({self._next}), {None})" if self._prev is None else\
+               f"{name}({self.value}, {None}, {name}({self._prev}))" if self._next is None else\
+               f"{name}({self.value}, {name}({self._next}),{name}({self._prev}))"
 
     def is_valid(self, dnode: Any) -> None:
         if not isinstance(dnode, (type(None), DoubleLinkedNode)):
