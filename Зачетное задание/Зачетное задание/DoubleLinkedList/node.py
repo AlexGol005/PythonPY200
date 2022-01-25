@@ -11,9 +11,7 @@ class Node:
         :param next_: следующий узел, если он есть
         """
         self.value = value
-        # self._next = next_  # вызовется setter
-        self.next = None
-        self.set_next(next_)
+        self.next = next_
 
     def __repr__(self) -> str:
         return f"Node({self.value}, {None})" if self.next is None else f"Node({self.value}, Node({self.next}))"
@@ -25,23 +23,19 @@ class Node:
         if not isinstance(node, (type(None), Node)):
             raise TypeError
 
-    # @property
-    # def next(self):
-    #     return self._next
-    #
-    # @next.setter
-    # def next(self, next_: Optional["Node"]):
-    #     self.is_valid(next_)
-    #     self._next = next_
+    @property
+    def next(self):
+        return self._next
 
-    def set_next(self, next_: Optional["Node"] = None) -> None:
+    @next.setter
+    def next(self, next_: Optional["Node"]):
         self.is_valid(next_)
-        self.next = next_
+        self._next = next_
 
 class DoubleLinkedNode(Node):
     def __init__(self, value, next_=None, prev=None):
         super().__init__(value, next_)
-        self._prev = prev
+        self.prev = prev
 
     def __repr__(self) -> str:
         name = self.__class__.__name__
@@ -68,3 +62,12 @@ if __name__ == "__main__":
     dl1 = DoubleLinkedNode(2, DoubleLinkedNode(3), DoubleLinkedNode(1))
     print(repr(dl1))
     print(dl1.prev)
+    dnode1 = DoubleLinkedNode(5)
+    dnode2 = DoubleLinkedNode(6)
+    print(dnode1)
+    dnode1.next = DoubleLinkedNode(6)
+    dnode1.prev = DoubleLinkedNode(4)
+    print(repr(dnode1))
+    print(repr(Node(5)))
+    print(DoubleLinkedNode(5).value)
+
