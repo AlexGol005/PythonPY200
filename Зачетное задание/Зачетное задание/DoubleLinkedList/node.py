@@ -70,4 +70,18 @@ if __name__ == "__main__":
     print(repr(dnode1))
     print(repr(Node(5)))
     print(DoubleLinkedNode(5).value)
+    DoubleLinkedNode(5).next = DoubleLinkedNode(6)
+    print(repr(DoubleLinkedNode(5)))
+    print('----------'*10)
+    a = DoubleLinkedNode(1)
+    b = DoubleLinkedNode(2)
+    c = DoubleLinkedNode(3)
+    print(repr(a))
+    a.next = b
+    print(repr(a))
+    b.prev = a
+    b.next = c
+    print(repr(b))
+
+
 

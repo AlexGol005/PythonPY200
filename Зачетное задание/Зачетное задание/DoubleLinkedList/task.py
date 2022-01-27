@@ -79,8 +79,6 @@ class LinkedList(MutableSequence):
         else:
             self._len -= 1
 
-
-
     def __len__(self):
         return self._len
 
@@ -89,6 +87,7 @@ class LinkedList(MutableSequence):
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({[node for node in self]})"
+
 
     def insert(self, index: int, value: Any) -> None:  # todo здесь и везде - проверки типов
         insert_node = Node(value)
@@ -162,7 +161,6 @@ class LinkedList(MutableSequence):
         self.__delitem__(index)
         return node.value
 
-
 class DoubleLinkedList(LinkedList):
 
     @staticmethod
@@ -173,8 +171,19 @@ class DoubleLinkedList(LinkedList):
         :param left_node: Левый или предыдущий узел
         :param right_node: Правый или следующий узел
         """
-        left_node.next = right_node
+        left_node._next = right_node
         right_node._prev = left_node
+
+    def _step_by_step_on_nodes(self, index: int) -> Any:
+        """ Функция выполняет перемещение по узлам до указанного индекса. И возвращает узел. """
+        if not isinstance(index, int):
+            raise TypeError()
+        if not 0 <= index < self._len:  # для for
+            raise IndexError()
+        current_node = self._head
+        for _ in range(index):
+            current_node = current_node.next
+        return current_node
 
     def _init_linked_list(self, data: Iterable):
         """ Метод, который создает вспомогательный список и связывает в нём узлы. """
@@ -184,7 +193,6 @@ class DoubleLinkedList(LinkedList):
         for i in range(len(self.list_nodes) - 1):
             current_node = self.list_nodes[i]
             next_node = self.list_nodes[i + 1]
-            # prev_node = self.list_nodes[i - 1]
             self._linked_nodes(current_node, next_node)
 
     def insert(self, index: int, value: Any) -> None:  # todo здесь и везде - проверки типов
@@ -205,15 +213,13 @@ class DoubleLinkedList(LinkedList):
 
     def append(self, value: Any) -> None:
         """ Добавление элемента в конец связного списка. """
-        append_dnode = DoubleLinkedList(value)
+        append_dnode = DoubleLinkedNode(value)
         if self._head is None:
             self._head = append_dnode
         else:
             last_index = self._len - 1
             last_dnode = self._step_by_step_on_nodes(last_index)
-
             self._linked_nodes(last_dnode, append_dnode)
-
         self._len += 1
 
     def index(self, value: Any, start: int = 0, stop: int = None) -> int:
@@ -261,48 +267,27 @@ class DoubleLinkedList(LinkedList):
 
 
 if __name__ == "__main__":
-    # проверка методов для односвязного списка
+    print('создаём односвязный и двусвязный список и печатаем их:')
     list_ = ['a', 'b', 'c']
     ll = LinkedList(list_)
-    print(ll[1])  # ll.__getitem__(1)
-    print(ll.__setitem__(1, 'v'))  # Expected: ['a', 'v', 'c']
-    print(ll)
-    ll.__delitem__(1)
-    print(ll)
-    ll.insert(3, 'b')
-    print(ll)
-    print(len(ll))
-    ll.append('d')
-    print(ll)
-    print(ll.index('b'))
-    print(ll.count('b'))
-    ll.extend(['df', 'as'])
-    print(ll)
-    print(ll.pop(4))
-    print(ll)
-    print('-'*50)
-    print(DoubleLinkedList(list_))
     dll = DoubleLinkedList(list_)
-    print(dll[1])
-    dll[1] = 1
-    print(dll)
-    ll.__delitem__(0)
     print(ll)
-    dll.__delitem__(0)
     print(dll)
-    dll.__delitem__(0)
+    print('к односвязному и двусвязному списку применяем append и печатаем:')
+    ll.append(5)
+    dll.append(5)
+    print(ll)
     print(dll)
-    print('----------------')
-    print(str(dll))
-    print(repr(dll))
-    # dll.append('r')
-    # dll.append('m')
-    print(dll)
-    ll._linked_nodes(Node(1), Node(2))
-    print(Node(1))
-    a = DoubleLinkedList(list_)
-    current_node = a.list_nodes[1]
-    print(repr(current_node))
+    print('в односвязном и двусвязном списке c append проверяем как связаны узлы:')
+    print(repr(ll.list_nodes))
+    print(repr(dll.list_nodes))
+
+
+
+
+
+
+
 
 
 
