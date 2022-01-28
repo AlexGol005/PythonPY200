@@ -14,10 +14,11 @@ class Node:
         self.next = next_
 
     def __repr__(self) -> str:
-        return f"Node({self.value}, {None})" if self.next is None else f"Node({self.value}, Node({self.next}))"
+        name = self.__class__.__name__
+        return f"{name}({self.value}, {None})" if self.next is None else f"{name}({self.value}, {name}({self.next}))"
 
-    def __str__(self) -> str:
-        return str(self.value)
+    # def __str__(self) -> str:
+    #     return str(self.value)
 
     def is_valid(self, node: Any) -> None:
         if not isinstance(node, (type(None), Node)):
@@ -82,6 +83,7 @@ if __name__ == "__main__":
     b.prev = a
     b.next = c
     print(repr(b))
+
 
 
 
