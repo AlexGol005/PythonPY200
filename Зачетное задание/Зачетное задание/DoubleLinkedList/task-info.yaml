@@ -36,5 +36,11 @@ files:
   text: |
     ...
   learner_created: false
-status: Unchecked
+- name: test_DoubleLinkedList.py
+  visible: true
+  learner_created: true
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sat, 29 Jan 2022 09:22:13 UTC
 record: -1

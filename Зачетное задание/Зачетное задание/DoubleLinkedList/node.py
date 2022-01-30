@@ -17,8 +17,8 @@ class Node:
         name = self.__class__.__name__
         return f"{name}({self.value}, {None})" if self.next is None else f"{name}({self.value}, {name}({self.next}))"
 
-    # def __str__(self) -> str:
-    #     return str(self.value)
+    def __str__(self) -> str:
+        return str(self.value)
 
     def is_valid(self, node: Any) -> None:
         if not isinstance(node, (type(None), Node)):
@@ -43,7 +43,7 @@ class DoubleLinkedNode(Node):
         return f"{name}({self.value}, {None}, {None}))" if self._next is None and self._prev is None else\
                f"{name}({self.value}, {name}({self._next}), {None})" if self._prev is None else\
                f"{name}({self.value}, {None}, {name}({self._prev}))" if self._next is None else\
-               f"{name}({self.value}, {name}({self._next}),{name}({self._prev}))"
+               f"{name}({self.value}, {name}({self._next}), {name}({self._prev}))"
 
     def is_valid(self, dnode: Any) -> None:
         if not isinstance(dnode, (type(None), DoubleLinkedNode)):
@@ -60,29 +60,22 @@ class DoubleLinkedNode(Node):
 
 
 if __name__ == "__main__":
-    dl1 = DoubleLinkedNode(2, DoubleLinkedNode(3), DoubleLinkedNode(1))
-    print(repr(dl1))
-    print(dl1.prev)
-    dnode1 = DoubleLinkedNode(5)
-    dnode2 = DoubleLinkedNode(6)
-    print(dnode1)
-    dnode1.next = DoubleLinkedNode(6)
-    dnode1.prev = DoubleLinkedNode(4)
-    print(repr(dnode1))
-    print(repr(Node(5)))
-    print(DoubleLinkedNode(5).value)
-    DoubleLinkedNode(5).next = DoubleLinkedNode(6)
-    print(repr(DoubleLinkedNode(5)))
-    print('----------'*10)
-    a = DoubleLinkedNode(1)
-    b = DoubleLinkedNode(2)
-    c = DoubleLinkedNode(3)
+    print('проверяем что двойные узлы связываются корректно:')
+    def linked_nodes(left_node, right_node):
+        left_node.next = right_node
+        right_node.prev = left_node
+
+    a = DoubleLinkedNode('a')
+    b = DoubleLinkedNode('b')
+    c = DoubleLinkedNode('c')
+    print(a)
+    print(b)
+    linked_nodes(a, b)
+    linked_nodes(b, c)
     print(repr(a))
-    a.next = b
-    print(repr(a))
-    b.prev = a
-    b.next = c
     print(repr(b))
+    print(repr(c))
+
 
 
 
