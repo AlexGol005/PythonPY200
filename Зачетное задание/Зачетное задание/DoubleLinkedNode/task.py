@@ -19,8 +19,9 @@ class Node:
     def __str__(self) -> str:
         return str(self.value)
 
-    def is_valid(self, node: Any) -> None:
-        if not isinstance(node, (type(None), Node)):
+    @classmethod
+    def is_valid(cls, node: Any) -> None:
+        if not isinstance(node, (type(None), cls)):
             raise TypeError
 
     @property
@@ -44,10 +45,6 @@ class DoubleLinkedNode(Node):
                f"{name}({self.value}, {name}({self.next}), {None})" if self.prev is None else\
                f"{name}({self.value}, {None}, {name}({self.prev}))" if self.next is None else\
                f"{name}({self.value}, {name}({self.next}),{name}({self.prev}))"
-
-    def is_valid(self, dnode: Any) -> None:
-        if not isinstance(dnode, (type(None), DoubleLinkedNode)):
-            raise TypeError
 
     @property
     def prev(self):

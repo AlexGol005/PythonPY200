@@ -6,6 +6,8 @@ from node import Node, DoubleLinkedNode
 
 
 class LinkedList(MutableSequence):
+    ABSTRACT_CLASS_NODE = Node
+
     def __init__(self, data: Iterable = None):
         """Конструктор связного списка"""
         self._len = 0
@@ -16,7 +18,7 @@ class LinkedList(MutableSequence):
 
     def _init_linked_list(self, data: Iterable) -> None:
         """ Метод, который создает вспомогательный список и связывает в нём узлы. """
-        self.list_nodes = [Node(value) for value in data]
+        self.list_nodes = [self.ABSTRACT_CLASS_NODE(value) for value in data]
         self._head = self.list_nodes[0]
         self._len = len(self.list_nodes)
         for m in range(len(self.list_nodes) - 1):
@@ -55,12 +57,12 @@ class LinkedList(MutableSequence):
         node.value = value
 
     def __delitem__(self, index: int) -> None:
-        """ Метод устанавливает удаляет узел по указанному индексу. """
+        """ Метод удаляет узел по указанному индексу. """
         if self._len > 2:
             if index == self._len - 1:
                 left_node = self.step_by_step_on_nodes(index - 1)
                 left_node.next = None
-
+                self._len -= 1
             elif index == 0:
                 self._head = self.step_by_step_on_nodes(index + 1)
                 self._len -= 1
@@ -93,9 +95,7 @@ class LinkedList(MutableSequence):
         """ Метод вставляет узел по указанному индексу"""
         if not isinstance(index, int):
             raise TypeError('в insert  не int')
-        if not 0 <= index < self._len:  # для for
-            raise IndexError('в insert  не тот индекс')
-        insert_node = Node(value)
+        insert_node = self.ABSTRACT_CLASS_NODE(value)
         if index == 0:
             insert_node.next = self._head
             self._head = insert_node
@@ -112,7 +112,7 @@ class LinkedList(MutableSequence):
 
     def append(self, value: Any) -> None:
         """ Добавление элемента в конец связного списка. """
-        append_node = Node(value)
+        append_node = self.ABSTRACT_CLASS_NODE(value)
         if self._len == 0:
             self._head = append_node
         else:
@@ -149,12 +149,12 @@ class LinkedList(MutableSequence):
                 counter_ += 1
         return sum_
 
-    def extend(self, value: list) -> None:
+    def extend(self, values: list) -> None:
         """ Добавление всех элементов списка в конец связного списка. """
-        if not isinstance(value, list):
+        if not isinstance(values, list):
             raise TypeError('не список')
-        for k in range(len(value)):
-            self.append(value[k])
+        for value in values:
+            self.append(value)
 
     def pop(self, index: int = None) -> Any:
         """ удаляет элемент из списка и возвращает элемент """
@@ -167,8 +167,21 @@ class LinkedList(MutableSequence):
             self.__delitem__(index)
             return node.value
 
+    def remove(self, value_) -> None:
+        index = 0
+        while index < self._len:
+            node = self.step_by_step_on_nodes(index)
+            if node.value == value_:
+                self.__delitem__(index)
+            else:
+                index += 1
+        # if index == self._len:
+        #     raise ValueError('такого элемента в списке нет')
+
 
 class DoubleLinkedList(LinkedList):
+    ABSTRACT_CLASS_NODE = DoubleLinkedNode
+
     @staticmethod
     def _linked_nodes(left_node: Node, right_node: Optional[Node] = None) -> None:
         """
@@ -178,48 +191,6 @@ class DoubleLinkedList(LinkedList):
         """
         left_node.next = right_node
         right_node.prev = left_node
-
-    def _init_linked_list(self, data: Iterable) -> None:
-        """ Метод, который создает вспомогательный список и связывает в нём узлы. """
-        self.list_nodes = [DoubleLinkedNode(value) for value in data]
-        self._head = self.list_nodes[0]
-        self._len = len(self.list_nodes)
-        for j in range(len(self.list_nodes) - 1):
-            current_node = self.list_nodes[j]
-            next_node = self.list_nodes[j + 1]
-            self._linked_nodes(current_node, next_node)
-
-    def append(self, value: Any) -> None:
-        """ Добавление элемента в конец связного списка. """
-        append_dnode = DoubleLinkedNode(value)
-        if self._head is None:
-            self._head = append_dnode
-        else:
-            last_index = self._len - 1
-            last_dnode = self.step_by_step_on_nodes(last_index)
-            self._linked_nodes(last_dnode, append_dnode)
-        self._len += 1
-
-    def insert(self, index: int, value: Any) -> None:
-        """ Метод вставляет узел по указанному индексу"""
-        if not isinstance(index, int):
-            raise TypeError('в insert  не int')
-        if not 0 <= index < self._len:  # для for
-            raise IndexError('в insert  не тот индекс')
-        insert_node = DoubleLinkedNode(value)
-        if index == 0:
-            insert_node.next = self._head
-            self._head = insert_node
-            self._linked_nodes(self._head, insert_node.next)
-            self._len += 1
-        elif index >= self._len:
-            self.append(value)
-        else:
-            prev_node = self.step_by_step_on_nodes(index - 1)
-            next_node = prev_node.next
-            self._linked_nodes(prev_node, insert_node)
-            self._linked_nodes(insert_node, next_node)
-            self._len += 1
 
 
 if __name__ == "__main__":
@@ -293,3 +264,33 @@ if __name__ == "__main__":
     print(ll)
     print(dll)
     print(repr(ll))
+    print("к обоим спискам применяем remove удаляем значение 'c' и печатаем списки:")
+    ll.remove('c')
+    dll.remove('c')
+    print(ll)
+    print(dll)
+    print("к обоим спискам применяем remove и удаляем первый элемент по значению 9:")
+    ll.remove(9)
+    dll.remove(9)
+    print(ll)
+    print(dll)
+    print(ll)
+    print(dll)
+    print("к обоим спискам применяем remove и удаляем все пятёрки :")
+    for i in range(4):
+        ll.remove(5)
+        dll.remove(5)
+        print(ll)
+        print(dll)
+    print("удаляем все и печатаем:")
+    ll.remove('yo')
+    dll.remove('yo')
+    print(ll)
+    print(dll)
+    ll.remove('t')
+    dll.remove('t')
+    print(ll)
+    print(dll)
+
+
+
