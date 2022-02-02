@@ -63,4 +63,4 @@ if __name__ == "__main__":
     dl1 = DoubleLinkedNode(2, DoubleLinkedNode(3), DoubleLinkedNode(1))
     print(repr(dl1))
     print(dl1.prev)
-    print(dl1.prev)
+
