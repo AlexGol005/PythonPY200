@@ -175,8 +175,8 @@ class LinkedList(MutableSequence):
                 self.__delitem__(index)
             else:
                 index += 1
-        # if index == self._len:
-        #     raise ValueError('такого элемента в списке нет')
+        if index == self._len:
+            raise ValueError('такого элемента в списке нет')
 
 
 class DoubleLinkedList(LinkedList):
